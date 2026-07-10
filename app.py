@@ -84,6 +84,11 @@ print("After clicking button")
 print(driver.current_url)
 print(driver.title)
 driver.save_screenshot("debug.png")
+
+with open("page.html", "w", encoding="utf-8") as f:
+    f.write(driver.page_source)
+
+print(driver.page_source[:5000])
 time.sleep(10)
 
 
