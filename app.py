@@ -10,10 +10,16 @@ import os
 import platform
 
 options = webdriver.ChromeOptions()
+
 options.add_argument("--headless=new")
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
+options.add_argument("--disable-gpu")
+options.add_argument("--window-size=1920,1080")
+
 options.binary_location = "/usr/bin/chromium"
+
+driver = webdriver.Chrome(options=options)
 
 print("Python:", platform.python_version())
 print("OS:", platform.platform())
@@ -73,6 +79,14 @@ password.send_keys(os.getenv("APP_PASSWORD"))
 password.send_keys(Keys.ENTER)
 
 print("Logged in successfully")
+print("Before clicking button")
+
+driver.find_element(By.XPATH, "something").click()
+
+print("After clicking button")
+print(driver.current_url)
+print(driver.title)
+driver.save_screenshot("debug.png")
 time.sleep(10)
 
 
