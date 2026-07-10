@@ -52,45 +52,43 @@ print(driver.title)
 driver.get("https://discord.com/login")
 time.sleep(10)
 
-#email = driver.find_element(By.CSS_SELECTOR, 'input[aria-label="Email or Phone Number"]')
-#password = driver.find_element(By.CSS_SELECTOR, 'input[name="password"]')
+print("EMAIL exists:", bool(os.getenv("APP_EMAIL")))
+print("PASSWORD exists:", bool(os.getenv("APP_PASSWORD")))
 
 email = WebDriverWait(driver, 20).until(
     EC.presence_of_element_located(
         (By.CSS_SELECTOR, 'input[aria-label="Email or Phone Number"]')
     )
 )
+
 password = WebDriverWait(driver, 20).until(
     EC.presence_of_element_located(
         (By.CSS_SELECTOR, 'input[name="password"]')
     )
 )
 
-
 email.clear()
 email.send_keys(os.getenv("APP_EMAIL"))
 
-
 password.clear()
-
 password.send_keys(os.getenv("APP_PASSWORD"))
-
 password.send_keys(Keys.ENTER)
 
-print("Logged in successfully")
-print("Before clicking button")
+print("Login submitted")
 
-print("After clicking button")
-print(driver.current_url)
-print(driver.title)
+time.sleep(15)
+
+print("URL after login:", driver.current_url)
+print("Title after login:", driver.title)
+
 driver.save_screenshot("debug.png")
 
 with open("page.html", "w", encoding="utf-8") as f:
     f.write(driver.page_source)
 
+print("Screenshot saved:", os.path.exists("debug.png"))
+print("Page source length:", len(driver.page_source))
 print(driver.page_source[:5000])
-time.sleep(10)
-
 
 
 
