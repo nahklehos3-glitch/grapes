@@ -19,7 +19,6 @@ options.add_argument("--window-size=1920,1080")
 
 options.binary_location = "/usr/bin/chromium"
 
-driver = webdriver.Chrome(options=options)
 
 print("Python:", platform.python_version())
 print("OS:", platform.platform())
@@ -80,8 +79,6 @@ password.send_keys(Keys.ENTER)
 
 print("Logged in successfully")
 print("Before clicking button")
-
-driver.find_element(By.XPATH, "something").click()
 
 print("After clicking button")
 print(driver.current_url)
